@@ -1,4 +1,4 @@
-module Refinery
+module Importer
   module WordPress
     class Attachment
       attr_reader :node
@@ -41,12 +41,8 @@ module Refinery
         url.match /\.(png|jpg|jpeg|gif)$/ 
       end
 
-      def to_refinery
-        if image?
-          to_image
-        else
-          to_resource
-        end
+      def to_typo
+        Resource.create(remote_upload_url: url, itunes_subtitle: title, itunes_summary: description)
       end
 
       def replace_url
@@ -58,26 +54,6 @@ module Refinery
       end
 
       private
-
-      def to_image
-        image = ::Image.new
-        image.created_at = post_date
-        image.image_url = url
-        image.save!
-
-        @refinery_image = image
-        image
-      end
-
-      def to_resource
-        resource = ::Resource.new
-        resource.created_at = post_date
-        resource.file_url = url
-        resource.save!
-
-        @refinery_resource = resource
-        resource
-      end
 
       def replace_image_url
         replace_image_url_in_blog_posts

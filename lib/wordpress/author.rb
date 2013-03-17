@@ -1,4 +1,4 @@
-module Refinery
+module Importer
   module WordPress
     class Author
       attr_reader :author_node
@@ -14,6 +14,10 @@ module Refinery
       def email
         author_node.xpath("wp:author_email").text
       end
+      
+      def name
+        author_node.xpath("wp:display_name").text
+      end
 
       def ==(other)
         login == other.login
@@ -23,14 +27,9 @@ module Refinery
         "WordPress::Author: #{login} <#{email}>"
       end
 
-      def to_refinery
-        user = User.find_or_initialize_by_username_and_email(login, email)
-        unless user.persisted?
-          user.password = 'password'
-          user.password_confirmation = 'password'
-          user.save
-        end
-        user
+      def to_typo
+        user = User.where(login: login).first_or_create(login: login, email: email, name: name, 
+                    password: "password", password_confirmation: "password")
       end
     end
   end

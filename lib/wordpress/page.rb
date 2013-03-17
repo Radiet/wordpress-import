@@ -1,4 +1,4 @@
-module Refinery
+module Importer
   module WordPress
     class Page
       include ::ActionView::Helpers::TagHelper
@@ -30,6 +30,8 @@ module Refinery
         formatted.gsub!(/(<pre.*?>)(.+?)(<\/pre>)/m) do |match| 
           "#{$1}#{strip_tags($2)}#{$3}"
         end
+        
+        formatted.gsub!(/\[\/?CAPTION[^\]+]\]/,'<br/>')
           
         formatted
       end
@@ -67,12 +69,9 @@ module Refinery
         post_id == other.post_id
       end
 
-      def to_refinery
-        page = ::Page.create!(:id => post_id, :title => title, 
+      def to_typo
+        page = ::Page.create(title: title, body: content,
           :created_at => post_date, :draft => draft?)
-
-        page.parts.create(:title => 'Body', :body => content_formatted)
-        page
       end
 
       private 

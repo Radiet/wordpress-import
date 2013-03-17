@@ -1,4 +1,4 @@
-module Refinery
+module Importer
   module WordPress
     class Comment
       attr_reader :node
@@ -35,13 +35,12 @@ module Refinery
         (email == other.email) && (date == other.date) && (content == other.content)
       end
 
-      def to_refinery
-        comment = BlogComment.new :name => author, :email => email
-
-        comment.body = content
-        comment.created_at = date
-        comment.state = approved? ? 'approved' : 'rejected'
-        comment
+      def to_typo
+#        comment = BlogComment.new :name => author, :email => email
+#        comment.body = content
+#        comment.created_at = date
+#        comment.state = approved? ? 'approved' : 'rejected'
+#        comment
       end
     end
   end

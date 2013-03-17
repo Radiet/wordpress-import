@@ -1,4 +1,4 @@
-module Refinery
+module Importer
   module WordPress
     class Railtie < Rails::Railtie
       rake_tasks do

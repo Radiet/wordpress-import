@@ -1,4 +1,4 @@
-module Refinery
+module Importer
   module WordPress
     class Dump
       attr_reader :doc
@@ -37,14 +37,14 @@ module Refinery
       end
 
       def tags
-        doc.xpath("//wp:tag/wp:tag_slug").collect do |tag|
-          Tag.new(tag.text)
+        doc.xpath("//wp:tag").collect do |tag|
+          Tag.new(tag)
         end
       end
 
       def categories
-        doc.xpath("//wp:category/wp:cat_name").collect do |category|
-          Category.new(category.text)
+        doc.xpath("//wp:category").collect do |category|
+          Category.new(category)
         end
       end
 

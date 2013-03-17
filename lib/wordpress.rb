@@ -1,7 +1,7 @@
 require 'nokogiri'
 require "wordpress/railtie" 
 
-module Refinery
+module Importer
   module WordPress
     autoload :Author, 'wordpress/author' 
     autoload :Tag, 'wordpress/tag'
