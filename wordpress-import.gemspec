@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name        = "wordpress-import"
   s.summary     = "Import WordPress XML dumps into typo."
   s.description = "This gem imports a WordPress XML dump"
-  s.version     = "0.5.0"
+  s.version     = "0.6.0"
   s.date        = "2013-02-22"
 
   s.authors     = ['David Middleton','Marc Remolt']

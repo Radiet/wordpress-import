@@ -71,7 +71,7 @@ module Importer
 
       def to_typo
         page = ::Page.create(title: title, body: content,
-          :created_at => post_date, :draft => draft?)
+          :created_at => post_date, :published => published?)
       end
 
       private 
